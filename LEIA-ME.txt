@@ -1,0 +1,48 @@
+ADEILDA VARIAÇÕES - SITE PRONTO PARA GITHUB E NETLIFY
+
+Suba todos estes arquivos para o GitHub.
+
+Arquivos principais:
+- index.html
+- acesso.html
+- produtos.html
+- produto.html
+- carrinho.html
+- perfil.html
+- adm.html
+- obrigado.html
+- diagnostico.html
+- config.js
+- privado.js
+- robots.txt
+- _redirects
+- _headers
+- netlify.toml
+- assets/
+- netlify/functions/checkout.js
+
+O site está configurado como vitrine privada simples.
+Código de acesso atual: ADEILDA2026
+
+Para trocar o código, abra acesso.html e altere esta linha:
+const CODIGO_CORRETO = "ADEILDA2026";
+
+No GitHub, confira que o arquivo se chama exatamente:
+_redirects
+com underline no começo.
+
+No Netlify, configure esta variável em Site settings > Environment variables:
+MERCADO_PAGO_ACCESS_TOKEN
+
+Não coloque o token do Mercado Pago no config.js.
+O config.js só tem a URL e a chave pública/publishable do Supabase.
+
+Depois do deploy:
+1. Abra o site publicado.
+2. Ele deve abrir acesso.html.
+3. Digite ADEILDA2026.
+4. Teste produtos.html.
+5. Teste adm.html.
+6. Teste carrinho e checkout.
+
+O arquivo diagnostico.html é para teste. Depois que tudo estiver funcionando, pode apagar ele do GitHub se quiser.
