@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diagnóstico | Adeilda Variações</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="privado.js"></script>
+</head>
+<body data-page="diagnostico">
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="container nav">
+        <a href="index.html" class="brand"><div class="logo-mark">AV</div><div class="logo-text"><strong>Adeilda</strong><span>Variações</span></div></a>
+        <nav class="desktop-links"><a href="index.html">Início</a><a href="produtos.html">Produtos</a><a href="adm.html">ADM</a></nav>
+      </div>
+    </header>
+    <main class="container section">
+      <div class="section-head"><div><div class="section-kicker">Teste técnico</div><h1 class="section-title">Diagnóstico do Supabase</h1><p class="section-subtitle">Use esta página só para conferir se tabela, Storage e funções estão respondendo.</p></div></div>
+      <div class="card"><div id="diagResults"><div class="loader"></div></div></div>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script>
+    const cfg = window.ADEILDA_CONFIG || {};
+    const out = document.getElementById('diagResults');
+    const safe = (text='') => String(text).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+    const row = (name, ok, detail='') => `<div class="diag-row"><div><strong>${safe(name)}</strong><small>${safe(detail)}</small></div><span class="badge ${ok ? 'ok' : 'error'}">${ok ? 'OK' : 'ERRO'}</span></div>`;
+    (async()=>{
+      const lines = [];
+      if(!cfg.SUPABASE_URL || !cfg.SUPABASE_KEY || !window.supabase){
+        out.innerHTML = row('Configuração', false, 'config.js ou biblioteca Supabase não carregou.');
+        return;
+      }
+      lines.push(row('Configuração', true, cfg.SUPABASE_URL));
+      const sb = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_KEY);
+
+      const produtos = await sb.from('produtos').select('id,nome,preco,image_url,categoria,tipo', {count:'exact'}).limit(3);
+      lines.push(row('Tabela public.produtos', !produtos.error, produtos.error ? produtos.error.message : `${produtos.count || 0} produto(s) encontrado(s).`));
+
+      const storage = await sb.storage.from('fotos-produtos').list('produtos', {limit: 5});
+      lines.push(row('Storage fotos-produtos/produtos', !storage.error, storage.error ? storage.error.message : `${storage.data?.length || 0} arquivo(s) listado(s).`));
+
+      const rpc = await sb.rpc('adeilda_apagar_produto', {p_id: -1});
+      lines.push(row('Função adeilda_apagar_produto', !rpc.error, rpc.error ? rpc.error.message : 'Função disponível.'));
+
+      out.innerHTML = lines.join('') + '<p class="section-subtitle" style="margin-top:18px">Se algum item der ERRO, rode CONFIGURAR-SUPABASE-SEM-APAGAR.sql no SQL Editor e atualize esta página.</p>';
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carrinho e Checkout | Adeilda Variações</title>
+  <meta name="description" content="Carrinho e checkout Mercado Pago da Adeilda Variações.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="privado.js"></script>
+</head>
+<body data-page="carrinho">
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="container nav">
+        <a href="index.html" class="brand"><div class="logo-mark">AV</div><div class="logo-text"><strong>Adeilda</strong><span>Variações</span></div></a>
+        <nav class="desktop-links"><a data-nav="home" href="index.html">Início</a><a data-nav="produtos" href="produtos.html">Produtos</a><a data-nav="perfil" href="perfil.html">Perfil</a><a data-nav="adm" href="adm.html">ADM</a></nav>
+        <div class="icon-row"><a class="icon-btn" href="perfil.html"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="7" r="4"></circle></svg></a><a class="icon-btn" href="carrinho.html"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"></path><path d="M6 6 5 2H2"></path><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg><span class="cart-count">0</span></a></div>
+      </div>
+    </header>
+
+    <main class="container section">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Pedido</div>
+          <h1 class="section-title">Carrinho</h1>
+          <p class="section-subtitle">Revise os produtos e finalize pelo Checkout Pro do Mercado Pago.</p>
+        </div>
+      </div>
+      <div class="cart-page">
+        <section>
+          <div id="cartList" class="cart-list"><div class="loader"></div></div>
+        </section>
+        <aside class="summary">
+          <h2 style="margin:0 0 12px">Resumo</h2>
+          <div class="summary-row"><span>Subtotal</span><strong id="cartSubtotal">R$ 0,00</strong></div>
+          <div class="summary-row"><span>Entrega</span><strong>Combinar</strong></div>
+          <div class="summary-row"><span>Total</span><strong id="cartTotal" class="summary-total">R$ 0,00</strong></div>
+          <form id="checkoutForm" style="margin-top:16px">
+            <div class="field"><label style="color:white">Nome</label><input name="nome" required placeholder="Seu nome"></div>
+            <div class="field"><label style="color:white">Email</label><input name="email" type="email" required placeholder="email@exemplo.com"></div>
+            <div class="field"><label style="color:white">Celular</label><input name="celular" inputmode="tel" required placeholder="558799999999"></div>
+            <button id="checkoutBtn" class="btn gold full" type="submit">Finalizar com Mercado Pago</button>
+          </form>
+          <p style="color:rgba(255,255,255,.7);line-height:1.5;font-size:.88rem">O pagamento é criado pela função segura do Netlify. O token do Mercado Pago não fica no HTML.</p>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="footer"><div class="container footer-grid"><div class="brand"><div class="logo-mark">AV</div><div class="logo-text"><strong>Adeilda</strong><span>Variações</span></div></div><p>Pagamento Mercado Pago e atendimento pelo WhatsApp.</p><a class="btn gold js-whatsapp" href="#">Ajuda no WhatsApp</a></div></footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="assets/main.js"></script>
+</body>
+</html>

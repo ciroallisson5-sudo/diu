@@ -1,0 +1,39 @@
+ADEILDA VARIAÇÕES - HTML/CSS/JS PURO
+
+Correções desta versão:
+- Corrigido erro: Cannot read properties of null (reading 'reset').
+- Painel ADM não usa mais POST direto em /rest/v1/produtos para cadastrar.
+- Cadastro usa a função segura adeilda_salvar_produto.
+- Exclusão usa a função segura adeilda_apagar_produto.
+- Se o upload da imagem funcionar mas o cadastro falhar, a imagem enviada é removida para não ficar órfã no Storage.
+- Produtos demo removidos. A loja mostra apenas produtos reais da tabela public.produtos.
+- Painel ADM lista produtos adicionados e permite apagar.
+- Incluída página diagnostico.html para testar Supabase, tabela, Storage e funções.
+
+PASSO OBRIGATÓRIO NO SUPABASE
+1. Abra CONFIGURAR-SUPABASE-SEM-APAGAR.sql.
+2. Copie TODO o conteúdo de dentro do arquivo.
+3. Cole no SQL Editor do Supabase.
+4. Clique em Run.
+5. Depois abra adm.html e aperte Ctrl + F5.
+
+IMPORTANTE
+- Não cole o nome do arquivo no SQL Editor. Cole o conteúdo do arquivo.
+- Se no console aparecer POST /rest/v1/produtos ao cadastrar, você ainda está usando arquivo antigo.
+- Nesta versão, cadastro de produto deve aparecer como chamada RPC para /rest/v1/rpc/adeilda_salvar_produto.
+
+ARQUIVOS PRINCIPAIS
+- index.html: home
+- produtos.html: vitrine completa
+- produto.html: página individual
+- adm.html: painel administrador
+- perfil.html: login/cadastro
+- carrinho.html: carrinho
+- diagnostico.html: teste técnico
+- config.js: URL e chave pública do Supabase
+- netlify/functions/checkout.js: checkout Mercado Pago no Netlify
+
+CHECKOUT MERCADO PAGO
+O Access Token do Mercado Pago não deve ficar em HTML/JS público.
+No Netlify, configure a variável de ambiente:
+MERCADO_PAGO_ACCESS_TOKEN
